@@ -3,469 +3,1284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة بيانات معلمي الرياضيات</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>منصة مسار للرياضيات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Ink&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        .form-container {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        .input-focus:focus {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        
+        header {
+            text-align: center;
+            padding: 70px 0 60px 0;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.7), rgba(74, 105, 189, 0.7)), 
+                        url('1fbacb69ec8f4be8b09439a0ceb8dbb5.jpg') center/cover no-repeat;
+            color: white;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        
+        .math-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            z-index: 1;
+            overflow: hidden;
         }
-        .success-animation {
-            animation: successPulse 0.6s ease-in-out;
+        
+        .math-symbol {
+            position: absolute;
+            font-size: 24px;
+            color: white;
+            opacity: 0.7;
+            animation: float 20s infinite linear;
         }
-        @keyframes successPulse {
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .year-decoration {
+            font-family: 'Reem Kufi Ink', sans-serif;
+            font-size: 2.8rem;
+            color: #ffd700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+            position: relative;
+            display: inline-block;
+            padding: 0 15px;
+        }
+        
+        .year-decoration::before,
+        .year-decoration::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        }
+        
+        .year-decoration::before {
+            right: 100%;
+        }
+        
+        .year-decoration::after {
+            left: 100%;
+        }
+        
+        .year-decoration .math-icon {
+            display: inline-block;
+            margin: 0 8px;
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.2); }
             100% { transform: scale(1); }
+        }
+        
+        h1 {
+            font-size: 4.2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Reem Kufi Ink', sans-serif;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            font-family: 'Amiri', serif;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, #4a69bd, #6a89cc);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header i {
+            transition: transform 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .card-body {
+            padding: 15px;
+            max-height: 1000px;
+            overflow-y: auto;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        
+        .card-body.collapsed {
+            max-height: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .card-body ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .card-body li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-body li:last-child {
+            border-bottom: none;
+        }
+        
+        .card-body a {
+            color: #4a69bd;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 6px 5px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+        
+        .card-body a:hover {
+            background: #f1f5fe;
+            padding-right: 12px;
+        }
+        
+        .card-body a i {
+            margin-left: 8px;
+            font-size: 1rem;
+        }
+        
+        .grade-section {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-right: 4px solid;
+        }
+        
+        .grade-section h3 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        
+        .grade-section h3 i {
+            margin-left: 8px;
+            font-size: 1.2rem;
+        }
+        
+        .book-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .book-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-right: 4px solid;
+        }
+        
+        .book-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+        }
+        
+        .book-icon {
+            margin-left: 15px;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .book-info {
+            flex-grow: 1;
+        }
+        
+        .book-title {
+            font-weight: 700;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        
+        .download-btn {
+            background: #4a69bd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            margin-right: 8px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            background: #3c5aa6;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .book-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .exercise-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .exercise-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-right: 3px solid #4a69bd;
+        }
+        
+        .exercise-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+        }
+        
+        .exercise-icon {
+            color: #2196f3;
+            margin-left: 12px;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e3f2fd;
+            border-radius: 50%;
+        }
+        
+        .exercise-info {
+            flex-grow: 1;
+        }
+        
+        .exercise-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+        
+        .platform-description {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-right: 3px solid #4a69bd;
+        }
+        
+        .platform-description h4 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .platform-description h4 i {
+            margin-left: 8px;
+            color: #4a69bd;
+            font-size: 1.1rem;
+        }
+        
+        .platform-description p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .info-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-right: 3px solid #4a69bd;
+        }
+        
+        .info-section h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-section h4 i {
+            margin-left: 8px;
+            color: #4a69bd;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #4a69bd;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(74, 105, 189, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: #4a69bd;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: #3c5aa6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 0.95rem;
+        }
+        
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* أنماط القوائم المنسدلة الجديدة */
+        .dropdown {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .dropdown-header {
+            background: linear-gradient(135deg, #4a69bd, #6a89cc);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .dropdown-header:hover {
+            background: linear-gradient(135deg, #3c5aa6, #5c7cba);
+        }
+        
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: #f8f9fa;
+            border-radius: 0 0 6px 6px;
+        }
+        
+        .dropdown-content.show {
+            max-height: 500px;
+        }
+        
+        .dropdown-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-item a {
+            color: #4a69bd;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        
+        .dropdown-item a:hover {
+            color: #3c5aa6;
+        }
+        
+        .dropdown-item i {
+            margin-left: 8px;
+            color: #4a69bd;
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 20px;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        /* أنماط مخصصة للدرس الأول مع الإطار والأيقونة */
+        .lesson-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            border: 2px solid #4a69bd;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .lesson-item:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            background: #f0f4ff;
+        }
+        
+        .watch-icon {
+            color: #4a69bd;
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .lesson-title {
+            flex-grow: 1;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        /* نافذة الفيديو المنبثقة */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .video-modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .modal-header {
+            background: #4a69bd;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* نسبة 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            .year-decoration {
+                font-size: 2rem;
+            }
+            
+            .year-decoration .math-icon {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .book-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 12px;
+            }
+            
+            .book-icon {
+                margin: 0 0 12px 0;
+            }
+            
+            .download-btn {
+                margin: 12px 0 0 0;
+                width: 100%;
+                justify-content: center;
+                padding: 8px 15px;
+            }
+            
+            .exercise-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 12px;
+            }
+            
+            .exercise-icon {
+                margin: 0 0 8px 0;
+            }
+            
+            header {
+                min-height: 300px;
+                padding: 50px 0 40px 0;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
         }
     </style>
 </head>
-<body class="gradient-bg min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-lg mb-4">
-                <span class="text-4xl">📊</span>
+<body>
+    <div class="container">
+        <header>
+            <div class="math-background" id="mathBackground"></div>
+            <div class="header-content">
+                <div class="year-decoration">
+                    <span class="math-icon">∑</span>
+                    2025
+                    <span class="math-icon">π</span>
+                </div>
+                <h1>منصة مسار</h1>
+                <p class="subtitle">بوابتك إلى عالم الرياضيات</p>
             </div>
-            <h1 class="text-4xl font-bold text-white mb-2">منصة بيانات معلمي الرياضيات</h1>
-            <p class="text-white/80 text-lg">نظام تسجيل وإدارة بيانات المعلمين</p>
-        </div>
-
-        <div class="max-w-4xl mx-auto">
-            <!-- Form Section -->
-            <div class="form-container rounded-2xl shadow-2xl p-8 mb-8">
-                <div class="flex items-center mb-6">
-                    <span class="text-3xl ml-3">👨‍🏫</span>
-                    <h2 class="text-2xl font-bold text-gray-800">إضافة معلم جديد</h2>
+        </header>
+        
+        <div class="main-content">
+            <div class="card">
+                <div class="card-header" onclick="toggleSection('aboutUs')">
+                    <span>من نحن</span>
+                    <i class="fas fa-chevron-up"></i>
                 </div>
-
-                <form id="teacherForm" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Name Field -->
-                        <div>
-                            <label for="teacherName" class="block text-sm font-semibold text-gray-700 mb-2">
-                                الاسم الكامل *
-                            </label>
-                            <input 
-                                type="text" 
-                                id="teacherName" 
-                                name="teacherName"
-                                required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-all duration-300 input-focus"
-                                placeholder="أدخل الاسم الكامل للمعلم"
-                            >
-                        </div>
-
-                        <!-- Grade Field -->
-                        <div>
-                            <label for="grade" class="block text-sm font-semibold text-gray-700 mb-2">
-                                الصف المدرس *
-                            </label>
-                            <select 
-                                id="grade" 
-                                name="grade"
-                                required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-all duration-300 input-focus"
-                            >
-                                <option value="">اختر الصف</option>
-                                <option value="الصف الأول">الصف الأول</option>
-                                <option value="الصف الثاني">الصف الثاني</option>
-                                <option value="الصف الثالث">الصف الثالث</option>
-                                <option value="الصف الرابع">الصف الرابع</option>
-                                <option value="الصف الخامس">الصف الخامس</option>
-                                <option value="الصف السادس">الصف السادس</option>
-                                <option value="الصف السابع">الصف السابع</option>
-                                <option value="الصف الثامن">الصف الثامن</option>
-                                <option value="الصف التاسع">الصف التاسع</option>
-                                <option value="الصف العاشر">الصف العاشر</option>
-                                <option value="الصف الحادي عشر">الصف الحادي عشر</option>
-                                <option value="الصف الثاني عشر">الصف الثاني عشر</option>
-                            </select>
-                        </div>
-
-                        <!-- Age Field -->
-                        <div>
-                            <label for="age" class="block text-sm font-semibold text-gray-700 mb-2">
-                                العمر *
-                            </label>
-                            <input 
-                                type="number" 
-                                id="age" 
-                                name="age"
-                                min="22" 
-                                max="65"
-                                required
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-all duration-300 input-focus"
-                                placeholder="أدخل العمر"
-                            >
-                        </div>
-
-                        <!-- Experience Field -->
-                        <div>
-                            <label for="experience" class="block text-sm font-semibold text-gray-700 mb-2">
-                                سنوات الخبرة
-                            </label>
-                            <input 
-                                type="number" 
-                                id="experience" 
-                                name="experience"
-                                min="0" 
-                                max="40"
-                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-all duration-300 input-focus"
-                                placeholder="أدخل سنوات الخبرة"
-                            >
-                        </div>
+                <div class="card-body" id="aboutUs">
+                    <div class="platform-description">
+                        <h4><i class="fas fa-question-circle"></i> ماهي منصة مسار؟</h4>
+                        <p>هي منصة تعليمية متخصصة في مادة الرياضيات، تهدف إلى تقديم محتوى تعليمي متميز. نقدم تمارين إضافية مع حلول مفصلة عبر مقاطع فيديو لتسهيل فهم الدروس وتحسين الأداء الدراسي.</p>
                     </div>
-
-                    <!-- Submit Button -->
-                    <div class="text-center pt-4">
-                        <button 
-                            type="submit" 
-                            class="submit-btn bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 hover:from-blue-700 hover:to-purple-700 shadow-lg"
-                        >
-                            <span class="flex items-center justify-center">
-                                <span class="ml-2">📤</span>
-                                إرسال البيانات
-                            </span>
-                        </button>
+                    
+                    <div class="info-section">
+                        <h4><i class="fas fa-bullhorn"></i> الرسالة</h4>
+                        <p>تمكين الطلاب من إتقان الرياضيات عبر تقديم محتوى تعليمي متميز يواكب أحدث الطرق التعليمية، ويساهم في تطوير مهارات التفكير المنطقي </p>
                     </div>
-                </form>
-
-                <!-- Success Message -->
-                <div id="successMessage" class="hidden mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-xl text-center">
-                    <span class="text-2xl">✅</span>
-                    <p class="font-semibold mt-2">تم إرسال البيانات بنجاح!</p>
-                </div>
-            </div>
-
-            <!-- Teachers List -->
-            <div class="form-container rounded-2xl shadow-2xl p-8">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center">
-                        <span class="text-3xl ml-3">📋</span>
-                        <h2 class="text-2xl font-bold text-gray-800">قائمة المعلمين المسجلين</h2>
+                    
+                    <div class="info-section">
+                        <h4><i class="fas fa-eye"></i> الرؤية</h4>
+                        <p>أن نكون المنصة الرائدة في تعليم الرياضيات عربياً، وأن نساهم في بناء جيل متمكن من العلوم الرياضية قادر على الابتكار والإبداع.</p>
                     </div>
-                    <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-semibold">
-                        العدد: <span id="teacherCount">0</span>
+                    
+                    <div class="info-section">
+                        <h4><i class="fas fa-envelope"></i> تواصل معنا</h4>
+                        <p>نرحل بأسئلتكم واستفساراتكم واقتراحاتكم. يمكنكم التواصل معنا عبر النموذج أدناه أو عبر البريد الإلكتروني: info@ain.alhur-111@edu.moe.om</p>
                     </div>
-                </div>
-
-                <div id="teachersList" class="space-y-4">
-                    <div class="text-center text-gray-500 py-8">
-                        <span class="text-6xl">👥</span>
-                        <p class="mt-4 text-lg">لا توجد بيانات معلمين مسجلة بعد</p>
-                        <p class="text-sm text-gray-400">قم بإضافة معلم جديد باستخدام النموذج أعلاه</p>
+                    
+                    <div class="contact-form">
+                        <h4>أرسل رسالة</h4>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">الاسم الكامل</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">البريد الإلكتروني</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">الرسالة</label>
+                                <textarea id="message" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <!-- Google Apps Script Integration Guide -->
-            <div class="form-container rounded-2xl shadow-2xl p-8 mt-8">
-                <div class="flex items-center mb-6">
-                    <span class="text-3xl ml-3">⚙️</span>
-                    <h2 class="text-2xl font-bold text-gray-800">دليل إعداد Google Apps Script</h2>
+            <div class="card">
+                <div class="card-header" onclick="toggleSection('mathLibrary')">
+                    <span>مكتبة الرياضيات</span>
+                    <i class="fas fa-chevron-up"></i>
                 </div>
-                
-                <!-- Step 1: Create Google Sheet -->
-                <div class="mb-8">
-                    <div class="bg-green-50 border border-green-200 rounded-xl p-6">
-                        <h3 class="font-bold text-green-800 mb-4 flex items-center">
-                            <span class="ml-2">📊</span>
-                            الخطوة 1: إنشاء Google Sheets
-                        </h3>
-                        <ol class="list-decimal list-inside space-y-2 text-green-700">
-                            <li>اذهب إلى <a href="https://sheets.google.com" target="_blank" rel="noopener noreferrer" class="underline font-semibold">Google Sheets</a></li>
-                            <li>أنشئ جدول بيانات جديد</li>
-                            <li>أضف العناوين في الصف الأول: الاسم | الصف | العمر | سنوات الخبرة | التاريخ</li>
-                            <li>احفظ الجدول باسم "بيانات معلمي الرياضيات"</li>
-                        </ol>
+                <div class="card-body" id="mathLibrary">
+                    <!-- الصف العاشر -->
+                    <div class="grade-section" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-right-color: #2196f3;">
+                        <h3 style="color: #1565c0;"><i class="fas fa-graduation-cap"></i> كتب الصف العاشر</h3>
+                        <div class="book-list">
+                            <div class="book-item" style="border-right-color: #4a69bd;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #e3f2fd; color: #2196f3;">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب الطالب - الرياضيات للصف العاشر</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1rx30Q2dCs3FPbJP1h8ZEsBeqpb3Jkyro/view?usp=drive_link" class="download-btn">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="book-item" style="border-right-color: #4a69bd;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #e3f2fd; color: #2196f3;">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب النشاط</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/17ci5vcLJ7TZ-YXmJgiBdW5-bt2VQISb0/view?usp=drive_link" class="download-btn">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- الصف التاسع -->
+                    <div class="grade-section" style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-right-color: #4caf50; margin-top: 20px;">
+                        <h3 style="color: #2e7d32;"><i class="fas fa-graduation-cap"></i> كتب الصف التاسع</h3>
+                        <div class="book-list">
+                            <div class="book-item" style="border-right-color: #4caf50;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #e8f5e9; color: #4caf50;">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="book-info">
+                                       <div class="book-title">كتاب الطالب - الرياضيات للصف التاسع</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1RjU3SNCLrSwY1t-Ga5ZmyDXqdQvZSW3_/view?usp=drive_link" class="download-btn" id="grade9-student-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="book-item" style="border-right-color: #4caf50;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #e8f5e9; color: #4caf50;">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="book-info">
+                                         <div class="book-title">كتاب النشاط</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1u5mh9VWzKI9n6uu3xOpdfQPv10gnysRR/view?usp=drive_link" class="download-btn" id="grade9-activity-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- الصف الثامن -->
+                    <div class="grade-section" style="background: linear-gradient(135deg, #fff3e0, #ffcc80); border-right-color: #ff9800; margin-top: 20px;">
+                        <h3 style="color: #ef6c00;"><i class="fas fa-graduation-cap"></i> كتب الصف الثامن</h3>
+                        <div class="book-list">
+                            <div class="book-item" style="border-right-color: #ff9800;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #fff3e0; color: #ff9800;">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب الطالب - الرياضيات للصف الثامن</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1mbByx2gzk911L5oyrzlMIE14XwkSx_nL/view?usp=drive_link" class="download-btn" id="grade8-student-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="book-item" style="border-right-color: #ff9800;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #fff3e0; color: #ff9800;">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب النشاط</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1Wnzxwi1yJvAWIF1eaRhapeSwrZuSUNK5/view?usp=drive_link" class="download-btn" id="grade8-activity-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- الصف السابع -->
+                    <div class="grade-section" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0); border-right-color: #e91e63; margin-top: 20px;">
+                        <h3 style="color: #c2185b;"><i class="fas fa-graduation-cap"></i> كتب الصف السابع</h3>
+                        <div class="book-list">
+                            <div class="book-item" style="border-right-color: #e91e63;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #fce4ec; color: #e91e63;">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب الطالب - الرياضيات للصف السابع</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1ceaiU5s7s5iAP_WE-AB4uHMJ8s8P5a2j/view?usp=drive_link" class="download-btn" id="grade7-student-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="book-item" style="border-right-color: #e91e63;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #fce4ec; color: #e91e63;">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب النشاط</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1WoR6Sv5bIX1qljxCpU6QNT0xM5BKOBUE/view?usp=drive_link" class="download-btn" id="grade7-activity-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- الصف السادس -->
+                    <div class="grade-section" style="background: linear-gradient(135deg, #e1f5fe, #81d4fa); border-right-color: #03a9f4; margin-top: 20px;">
+                        <h3 style="color: #0277bd;"><i class="fas fa-graduation-cap"></i> كتب الصف السادس</h3>
+                        <div class="book-list">
+                            <div class="book-item" style="border-right-color: #03a9f4;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #e1f5fe; color: #03a9f4;">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب الطالب - الرياضيات للصف السادس</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1chI8Yup3Fl4FCyoIzdqY4ElHHXpY8McP/view?usp=drive_link" class="download-btn" id="grade6-student-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="book-item" style="border-right-color: #03a9f4;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #e1f5fe; color: #03a9f4;">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب النشاط</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1fEgUQYv-bYKcQh8qXRGG07NnBHsdTuMe/view?usp=drive_link" class="download-btn" id="grade6-activity-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- الصف الخامس -->
+                    <div class="grade-section" style="background: linear-gradient(135deg, #f3e5f5, #ce93d8); border-right-color: #9c27b0; margin-top: 20px;">
+                        <h3 style="color: #7b1fa2;"><i class="fas fa-graduation-cap"></i> كتب الصف الخامس</h3>
+                        <div class="book-list">
+                            <div class="book-item" style="border-right-color: #9c27b0;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #f3e5f5; color: #9c27b0;">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب الطالب - الرياضيات للصف الخامس</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/1N3ZHo2gKOdy4vHJ8LC7mCEomatr8Xzam/view?usp=drive_link" class="download-btn" id="grade5-student-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="book-item" style="border-right-color: #9c27b0;">
+                                <div class="book-container">
+                                    <div class="book-icon" style="background: #f3e5f5; color: #9c27b0;">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="book-info">
+                                        <div class="book-title">كتاب النشاط</div>
+                                    </div>
+                                    <a href="https://drive.google.com/file/d/13I0ZXyb_RWD1-iyCCarDUNSPo9_dNcpk/view?usp=drive_link" class="download-btn" id="grade5-activity-book">
+                                        <i class="fas fa-download"></i> تحميل
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Step 2: Create Apps Script -->
-                <div class="mb-8">
-                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
-                        <h3 class="font-bold text-blue-800 mb-4 flex items-center">
-                            <span class="ml-2">🔧</span>
-                            الخطوة 2: إنشاء Google Apps Script
-                        </h3>
-                        <ol class="list-decimal list-inside space-y-2 text-blue-700 mb-4">
-                            <li>من جدول البيانات، اذهب إلى Extensions > Apps Script</li>
-                            <li>احذف الكود الموجود والصق الكود التالي:</li>
-                        </ol>
+            </div>
+            
+            <div class="card">
+                <div class="card-header" onclick="toggleSection('exercises')">
+                    <span>تمارين وأنشطة محلولة</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="card-body" id="exercises">
+                    <div class="grade-section" style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-right-color: #2196f3;">
+                        <h3 style="color: #1565c0;"><i class="fas fa-graduation-cap"></i> تمارين لجميع الصفوف</h3>
+                        <div class="dropdown">
+                            <div class="dropdown-header" onclick="toggleDropdown('grade10')">
+                                <span>تمارين الصف العاشر</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-content" id="grade10">
+                                <!-- تمت إضافة الدرس الأول هنا مع الإطار والأيقونة -->
+                                <div class="lesson-item" onclick="openVideoModal()">
+                                    <i class="fas fa-eye watch-icon"></i>
+                                    <span class="lesson-title">الدرس الأول 1-1 التمثيلات البيانية للتحويل</span>
+                                </div>
+                                <!-- باقي المحتوى الأصلي -->
+                                <div class="empty-message">
+                                    <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                    <p>لم يتم إضافة تمارين أخرى بعد</p>
+                                </div>
+                            </div>
+                        </div>
                         
-                        <div class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono overflow-x-auto">
-                            <pre>function doPost(e) {
-  try {
-    // الحصول على البيانات المرسلة
-    const data = JSON.parse(e.postData.contents);
-    
-    // فتح جدول البيانات (ضع ID الجدول هنا)
-    const sheet = SpreadsheetApp.openById('https://docs.google.com/spreadsheets/d/1HCzQ0GlmsESgZsGe5zJAGD2T8Q_l0pWYH8aOaBRGNSY/edit?resourcekey=&gid=1410236495#gid=1410236495').getActiveSheet();
-    
-    // إضافة البيانات إلى صف جديد
-    sheet.appendRow([
-      data.name,
-      data.grade, 
-      data.age,
-      data.experience,
-      new Date()
-    ]);
-    
-    return ContentService
-      .createTextOutput(JSON.stringify({success: true}))
-      .setMimeType(ContentService.MimeType.JSON);
-      
-  } catch (error) {
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        success: false, 
-        message: error.toString()
-      }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}</pre>
+                        <!-- تمارين الصف التاسع -->
+                        <div class="dropdown">
+                            <div class="dropdown-header" onclick="toggleDropdown('grade9')">
+                                <span>تمارين الصف التاسع</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-content" id="grade9">
+                                <div class="empty-message">
+                                    <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                    <p>لم يتم إضافة تمارين بعد</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Step 3: Deploy Script -->
-                <div class="mb-8">
-                    <div class="bg-purple-50 border border-purple-200 rounded-xl p-6">
-                        <h3 class="font-bold text-purple-800 mb-4 flex items-center">
-                            <span class="ml-2">🚀</span>
-                            الخطوة 3: نشر السكريبت
-                        </h3>
-                        <ol class="list-decimal list-inside space-y-2 text-purple-700">
-                            <li>اضغط على "Deploy" > "New deployment"</li>
-                            <li>اختر Type: "Web app"</li>
-                            <li>Execute as: "Me"</li>
-                            <li>Who has access: "Anyone"</li>
-                            <li>اضغط "Deploy" وانسخ الرابط</li>
-                            <li>ضع الرابط في المتغير GOOGLE_SCRIPT_URL في الكود أعلاه</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <!-- Step 4: Get Sheet ID -->
-                <div class="mb-6">
-                    <div class="bg-orange-50 border border-orange-200 rounded-xl p-6">
-                        <h3 class="font-bold text-orange-800 mb-4 flex items-center">
-                            <span class="ml-2">🆔</span>
-                            الخطوة 4: الحصول على ID الجدول
-                        </h3>
-                        <p class="text-orange-700 mb-2">من رابط جدول البيانات، انسخ الجزء بين /d/ و /edit:</p>
-                        <div class="bg-gray-100 p-3 rounded font-mono text-sm">
-                            https://docs.google.com/spreadsheets/d/<span class="bg-yellow-200 px-1">هذا_هو_الـID</span>/edit
+                        
+                        <!-- تمارين الصف الثامن -->
+                        <div class="dropdown">
+                            <div class="dropdown-header" onclick="toggleDropdown('grade8')">
+                                <span>تمارين الصف الثامن</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-content" id="grade8">
+                                <div class="empty-message">
+                                    <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                    <p>لم يتم إضافة تمارين بعد</p>
+                                </div>
+                            </div>
                         </div>
-                        <p class="text-orange-700 mt-2 text-sm">ضع هذا الـ ID في مكان "ضع_ID_الجدول_هنا" في الكود</p>
+                        
+                        <!-- تمارين الصف السابع -->
+                        <div class="dropdown">
+                            <div class="dropdown-header" onclick="toggleDropdown('grade7')">
+                                <span>تمارين الصف السابع</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-content" id="grade7">
+                                <div class="empty-message">
+                                    <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                    <p>لم يتم إضافة تمارين بعد</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- تمارين الصف السادس -->
+                        <div class="dropdown">
+                            <div class="dropdown-header" onclick="toggleDropdown('grade6')">
+                                <span>تمارين الصف السادس</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-content" id="grade6">
+                                <div class="empty-message">
+                                    <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                    <p>لم يتم إضافة تمارين بعد</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- تمارين الصف الخامس -->
+                        <div class="dropdown">
+                            <div class="dropdown-header" onclick="toggleDropdown('grade5')">
+                                <span>تمارين الصف الخامس</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-content" id="grade5">
+                                <div class="empty-message">
+                                    <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 10px;"></i>
+                                    <p>لم يتم إضافة تمارين بعد</p>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
-                </div>
-
-                <!-- Current Status -->
-                <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
-                    <h3 class="font-bold text-gray-800 mb-3 flex items-center">
-                        <span class="ml-2">📊</span>
-                        الحالة الحالية
-                    </h3>
-                    <div id="connectionStatus" class="flex items-center">
-                        <span class="w-3 h-3 bg-yellow-500 rounded-full ml-2"></span>
-                        <span class="text-gray-700">غير متصل بـ Google Sheets (يعمل محلياً فقط)</span>
-                    </div>
-                    <p class="text-gray-600 text-sm mt-2">
-                        بعد إعداد Google Apps Script، ستتمكن من إرسال البيانات مباشرة إلى Google Sheets
-                    </p>
                 </div>
             </div>
         </div>
+        
+        <!-- نافذة الفيديو المنبثقة -->
+        <div class="video-modal" id="videoModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>الدرس الأول 1-1 التمثيلات البيانية للتحويل</h3>
+                    <button class="close-btn" onclick="closeVideoModal()">&times;</button>
+                </div>
+                <div class="video-container">
+                    <iframe src="https://drive.google.com/file/d/1ZXjR28S1r32EmEGbYuzer3hgXR3AevWk/preview" allow="autoplay" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2025 منصة مسار للرياضيات. جميع الحقوق محفوظة.</p>
+        </footer>
     </div>
 
+    <div class="toast" id="toast">تم إرسال رسالتك بنجاح!</div>
+
     <script>
-        let teachers = [];
-        let teacherIdCounter = 1;
-
-        const form = document.getElementById('teacherForm');
-        const successMessage = document.getElementById('successMessage');
-        const teachersList = document.getElementById('teachersList');
-        const teacherCount = document.getElementById('teacherCount');
-
-        // رابط Google Apps Script (ضع الرابط الخاص بك هنا)
-        const GOOGLE_SCRIPT_URL = 'ضع_رابط_Google_Apps_Script_هنا';
-
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
+        // إنشاء رموز رياضيات عشوائية متحركة في الخلفية
+        document.addEventListener('DOMContentLoaded', function() {
+            const mathBackground = document.getElementById('mathBackground');
+            const mathSymbols = ['∑', '∫', '√', 'π', '∞', 'Δ', 'α', 'β', 'γ', 'θ', 'λ', 'μ', 'σ', 'ω', '≡', '±', '≠', '≈', '≤', '≥', '÷', '×', '→', '∀', '∃', '∈', '∉'];
             
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalText = submitButton.innerHTML;
-            
-            // تغيير حالة الزر أثناء الإرسال
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="flex items-center justify-center"><span class="ml-2">⏳</span>جاري الإرسال...</span>';
-            
-            const formData = new FormData(form);
-            const teacher = {
-                id: teacherIdCounter++,
-                name: formData.get('teacherName'),
-                grade: formData.get('grade'),
-                age: formData.get('age'),
-                experience: formData.get('experience') || 'غير محدد',
-                timestamp: new Date().toLocaleString('ar-SA')
-            };
-
-            try {
-                // إرسال البيانات إلى Google Apps Script
-                if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbz9G-G-gYOaZoY5sE1acjAh9MvlS_WUU7dM_Uh9tnSKjRIR6VuitF4Uc4s3JyyzSejwrQ/exec') {
-                    const response = await fetch(GOOGLE_SCRIPT_URL, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            name: teacher.name,
-                            grade: teacher.grade,
-                            age: teacher.age,
-                            experience: teacher.experience
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    
-                    if (!result.success) {
-                        throw new Error(result.message || 'فشل في إرسال البيانات');
-                    }
-                    
-                    showSuccessMessage('تم إرسال البيانات إلى Google Sheets بنجاح! ✅');
-                } else {
-                    showSuccessMessage('تم حفظ البيانات محلياً (قم بإعداد رابط Google Apps Script)');
-                }
+            for (let i = 0; i < 40; i++) {
+                const symbol = document.createElement('div');
+                symbol.className = 'math-symbol';
+                symbol.textContent = mathSymbols[Math.floor(Math.random() * mathSymbols.length)];
                 
-                // إضافة البيانات محلياً أيضاً
-                teachers.push(teacher);
-                updateTeachersList();
-                form.reset();
+                // تعيين مواقع عشوائية للرموز
+                symbol.style.left = Math.random() * 100 + '%';
+                symbol.style.animationDuration = (Math.random() * 20 + 10) + 's';
+                symbol.style.animationDelay = Math.random() * 5 + 's';
                 
-            } catch (error) {
-                console.error('خطأ في إرسال البيانات:', error);
-                showErrorMessage('حدث خطأ في إرسال البيانات: ' + error.message);
-                
-                // حفظ البيانات محلياً في حالة الخطأ
-                teachers.push(teacher);
-                updateTeachersList();
-                form.reset();
-            } finally {
-                // إعادة تعيين حالة الزر
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalText;
+                mathBackground.appendChild(symbol);
             }
         });
 
-        function updateTeachersList() {
-            teacherCount.textContent = teachers.length;
+        // وظيفة تبديل فتح وإغلاق الأقسام
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const icon = section.previousElementSibling.querySelector('i');
             
-            if (teachers.length === 0) {
-                teachersList.innerHTML = `
-                    <div class="text-center text-gray-500 py-8">
-                        <span class="text-6xl">👥</span>
-                        <p class="mt-4 text-lg">لا توجد بيانات معلمين مسجلة بعد</p>
-                        <p class="text-sm text-gray-400">قم بإضافة معلم جديد باستخدام النموذج أعلاه</p>
-                    </div>
-                `;
-                return;
+            section.classList.toggle('collapsed');
+            
+            if (section.classList.contains('collapsed')) {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
             }
+        }
 
-            teachersList.innerHTML = teachers.map(teacher => `
-                <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-                    <div class="flex items-start justify-between">
-                        <div class="flex-1">
-                            <div class="flex items-center mb-3">
-                                <span class="text-2xl ml-3">👨‍🏫</span>
-                                <h3 class="text-xl font-bold text-gray-800">${teacher.name}</h3>
-                            </div>
-                            
-                            <div class="grid md:grid-cols-3 gap-4 text-sm">
-                                <div class="flex items-center">
-                                    <span class="text-blue-600 ml-2">📚</span>
-                                    <span class="text-gray-600">الصف:</span>
-                                    <span class="font-semibold mr-2">${teacher.grade}</span>
-                                </div>
-                                
-                                <div class="flex items-center">
-                                    <span class="text-green-600 ml-2">🎂</span>
-                                    <span class="text-gray-600">العمر:</span>
-                                    <span class="font-semibold mr-2">${teacher.age} سنة</span>
-                                </div>
-                                
-                                <div class="flex items-center">
-                                    <span class="text-purple-600 ml-2">⭐</span>
-                                    <span class="text-gray-600">الخبرة:</span>
-                                    <span class="font-semibold mr-2">${teacher.experience}</span>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-3 text-xs text-gray-500">
-                                تاريخ التسجيل: ${teacher.timestamp}
-                            </div>
-                        </div>
+        // وظيفة تبديل القوائم المنسدلة
+        function toggleDropdown(dropdownId) {
+            const dropdown = document.getElementById(dropdownId);
+            const icon = dropdown.previousElementSibling.querySelector('i');
+            
+            dropdown.classList.toggle('show');
+            
+            if (dropdown.classList.contains('show')) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // وظيفة إظافة رسالة التأكيد
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // وظيفة فتح نافذة الفيديو
+        function openVideoModal() {
+            const modal = document.getElementById('videoModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // منع التمرير عند فتح النافذة
+        }
+
+        // وظيفة إغلاق نافذة الفيديو
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = ''; // إعادة التمرير
+        }
+
+        // إغلاق النافذة عند النقر خارجها
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+
+        // جعل الأقسام mفتوحة بشكل افتراضي
+        document.addEventListener('DOMContentLoaded', function() {
+            // فتح جميع الأقسام عند تحميل الصفحة
+            document.querySelectorAll('.card-body').forEach(section => {
+                section.classList.remove('collapsed');
+            });
+            
+            // إضافة تفاعلية للنموذج
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showToast('شكراً لك على رسالتك! سنقوم بالرد عليك في أقرب وقت ممكن.');
+                    contactForm.reset();
+                });
+            }
+            
+            // إضافة تأثير التحميل عند النقر على أزرار التحميل
+            document.querySelectorAll('.download-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // إذا كان الزر يحتوي على رابط، لا نمنع السلوك الافتراضي
+                    if (this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
+                    
+                    const originalText = this.innerHTML;
+                    
+                    // تأثير التحميل
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التحميل...';
+                    this.classList.add('loading');
+                    
+                    // محاكاة عملية التحميل
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.classList.remove('loading');
                         
-                        <button onclick="removeTeacher(${teacher.id})" class="text-red-500 hover:text-red-700 transition-colors duration-200 p-2">
-                            <span class="text-xl">🗑️</span>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function removeTeacher(id) {
-            teachers = teachers.filter(teacher => teacher.id !== id);
-            updateTeachersList();
-        }
-
-        function showSuccessMessage(message = 'تم إرسال البيانات بنجاح!') {
-            successMessage.innerHTML = `
-                <span class="text-2xl">✅</span>
-                <p class="font-semibold mt-2">${message}</p>
-            `;
-            successMessage.classList.remove('hidden');
-            successMessage.classList.add('success-animation');
-            
-            setTimeout(() => {
-                successMessage.classList.add('hidden');
-                successMessage.classList.remove('success-animation');
-            }, 4000);
-        }
-
-        function showErrorMessage(message) {
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'mt-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded-xl text-center';
-            errorDiv.innerHTML = `
-                <span class="text-2xl">❌</span>
-                <p class="font-semibold mt-2">${message}</p>
-            `;
-            
-            form.parentNode.insertBefore(errorDiv, successMessage);
-            
-            setTimeout(() => {
-                errorDiv.remove();
-            }, 5000);
-        }
-
-        // Initialize
-        updateTeachersList();
+                        // إذا كان الزر يحتوي على رابط حقيقي، لا نعرض الرسالة
+                        if (this.getAttribute('href') === '#') {
+                            showToast('بدأ تحميل الملف بنجاح!');
+                        }
+                    }, 1500);
+                });
+            });
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9869d12c64fbf9fa',t:'MTc1OTEzMTQ2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
+
