@@ -703,6 +703,46 @@
             border: none;
         }
         
+        /* أنماط جديدة للاختبارات */
+        .test-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            border: 2px solid #4a69bd;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .test-item:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            background: #f0f4ff;
+        }
+        
+        .test-icon {
+            color: #4a69bd;
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .test-title {
+            flex-grow: 1;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .test-year {
+            background: #4a69bd;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 3rem;
@@ -758,6 +798,16 @@
             
             .modal-content {
                 width: 95%;
+            }
+            
+            .test-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 12px;
+            }
+            
+            .test-year {
+                margin: 8px 0 0 0;
             }
         }
     </style>
@@ -1123,6 +1173,29 @@
                                 <div class="empty-message">
                                     <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 10px;"></i>
                                     <p>لم يتم إضافة تمارين بعد</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- القسم الجديد: اختبارات نهائية وتجريبية سابقة -->
+                    <div class="grade-section" style="background: linear-gradient(135deg, #fff8e1, #ffecb3); border-right-color: #ffa000; margin-top: 30px;">
+                        <h3 style="color: #ff8f00;"><i class="fas fa-file-alt"></i> اختبارات نهائية وتجريبية سابقة</h3>
+                        
+                        <!-- اختبارات الصف العاشر فقط -->
+                        <div class="dropdown">
+                            <div class="dropdown-header" onclick="toggleDropdown('tests-grade10')">
+                                <span>اختبارات الصف العاشر</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-content" id="tests-grade10">
+                                <div class="test-item">
+                                    <i class="fas fa-file-pdf test-icon"></i>
+                                    <span class="test-title">ملف 1</span>
+                                    <a href="https://drive.google.com/file/d/1pld86jAnhyM0BsEsQ2VmGcdBr2isSjyV/view?usp=drive_link" class="download-btn" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> فتح الملف
+                                    </a>
                                 </div>
                             </div>
                         </div>
