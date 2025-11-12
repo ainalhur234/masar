@@ -1095,10 +1095,17 @@
                             </div>
                             <div class="dropdown-content" id="grade10">
                                 <!-- تمت إضافة الدرس الأول هنا مع الإطار والأيقونة -->
-                                <div class="lesson-item" onclick="openVideoModal()">
+                                <div class="lesson-item" onclick="openVideoModal('الدرس الأول 1-1 التمثيلات البيانية للتحويل', 'https://drive.google.com/file/d/1ZXjR28S1r32EmEGbYuzer3hgXR3AevWk/preview')">
                                     <i class="fas fa-eye watch-icon"></i>
                                     <span class="lesson-title">الدرس الأول 1-1 التمثيلات البيانية للتحويل</span>
                                 </div>
+                                
+                                <!-- تمت إضافة الدرس الثاني هنا مع الإطار والأيقونة -->
+                                <div class="lesson-item" onclick="openVideoModal('الدرس الثاني 1-2 التمثيلات البيانية للدوال', 'https://d.top4top.io/m_36033wax81.mp4')">
+                                    <i class="fas fa-eye watch-icon"></i>
+                                    <span class="lesson-title">الدرس الثاني 1-2 التمثيلات البيانية للدوال</span>
+                                </div>
+                                
                                 <!-- باقي المحتوى الأصلي -->
                                 <div class="empty-message">
                                     <i class="fas fa-folder-open" style="font-size: 2rem; margin-bottom: 10px;"></i>
@@ -1209,11 +1216,11 @@
         <div class="video-modal" id="videoModal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>الدرس الأول 1-1 التمثيلات البيانية للتحويل</h3>
+                    <h3 id="modalTitle">عنوان الدرس</h3>
                     <button class="close-btn" onclick="closeVideoModal()">&times;</button>
                 </div>
                 <div class="video-container">
-                    <iframe src="https://drive.google.com/file/d/1ZXjR28S1r32EmEGbYuzer3hgXR3AevWk/preview" allow="autoplay" allowfullscreen></iframe>
+                    <iframe id="videoFrame" src="" allow="autoplay" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -1289,8 +1296,14 @@
         }
 
         // وظيفة فتح نافذة الفيديو
-        function openVideoModal() {
+        function openVideoModal(title, videoUrl) {
             const modal = document.getElementById('videoModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const videoFrame = document.getElementById('videoFrame');
+            
+            modalTitle.textContent = title;
+            videoFrame.src = videoUrl;
+            
             modal.classList.add('show');
             document.body.style.overflow = 'hidden'; // منع التمرير عند فتح النافذة
         }
@@ -1298,7 +1311,10 @@
         // وظيفة إغلاق نافذة الفيديو
         function closeVideoModal() {
             const modal = document.getElementById('videoModal');
+            const videoFrame = document.getElementById('videoFrame');
+            
             modal.classList.remove('show');
+            videoFrame.src = ''; // إزالة مصدر الفيديو
             document.body.style.overflow = ''; // إعادة التمرير
         }
 
