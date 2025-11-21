@@ -37,7 +37,7 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             background: linear-gradient(135deg, rgba(44, 62, 80, 0.7), rgba(74, 105, 189, 0.7)), 
-                        url('1fbacb69ec8f4be8b09439a0ceb8dbb5.jpg') center/cover no-repeat;
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%234a69bd"/></svg>') center/cover no-repeat;
             color: white;
             min-height: 350px;
             display: flex;
@@ -421,49 +421,30 @@
             color: #4a69bd;
         }
         
-        .contact-form {
+        .whatsapp-contact {
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
+            text-align: center;
         }
         
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
+        .whatsapp-contact h4 {
             color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+        .whatsapp-contact h4 i {
+            margin-left: 8px;
+            color: #25D366;
         }
         
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: #4a69bd;
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(74, 105, 189, 0.2);
-        }
-        
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background: #4a69bd;
+        .whatsapp-btn {
+            background: #25D366;
             color: white;
             border: none;
             padding: 12px 25px;
@@ -472,10 +453,15 @@
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            margin-top: 10px;
         }
         
-        .submit-btn:hover {
-            background: #3c5aa6;
+        .whatsapp-btn:hover {
+            background: #128C7E;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -850,27 +836,16 @@
                     </div>
                     
                     <div class="info-section">
-                        <h4><i class="fas fa-envelope"></i> تواصل معنا</h4>
-                        <p>نرحل بأسئلتكم واستفساراتكم واقتراحاتكم. يمكنكم التواصل معنا عبر النموذج أدناه أو عبر البريد الإلكتروني: info@ain.alhur-111@edu.moe.om</p>
+                        <h4><i class="fas fa-comments"></i> تواصل معنا</h4>
+                        <p>نرحب بأسئلتكم واستفساراتكم واقتراحاتكم. يمكنكم التواصل معنا مباشرة عبر الواتساب:</p>
                     </div>
                     
-                    <div class="contact-form">
-                        <h4>أرسل رسالة</h4>
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <label for="name">الاسم الكامل</label>
-                                <input type="text" id="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">البريد الإلكتروني</label>
-                                <input type="email" id="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">الرسالة</label>
-                                <textarea id="message" required></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn">إرسال الرسالة</button>
-                        </form>
+                    <div class="whatsapp-contact">
+                        <h4><i class="fab fa-whatsapp"></i> تواصل عبر الواتساب</h4>
+                        <p>للاستفسارات أو تقديم المقترحات، يمكنك التواصل معنا مباشرة عبر الواتساب:</p>
+                        <a href="https://wa.me/96895573386" class="whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> التواصل عبر الواتساب
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1199,7 +1174,7 @@
                             <div class="dropdown-content" id="tests-grade10">
                                 <div class="test-item">
                                     <i class="fas fa-file-pdf test-icon"></i>
-                                    <span class="test-title">ملف 1</span>
+                                    <span class="test-title">ملف إختبارات سابقة</span>
                                     <a href="https://drive.google.com/file/d/1pld86jAnhyM0BsEsQ2VmGcdBr2isSjyV/view?usp=drive_link" class="download-btn" target="_blank">
                                         <i class="fas fa-external-link-alt"></i> فتح الملف
                                     </a>
@@ -1325,22 +1300,12 @@
             }
         });
 
-        // جعل الأقسام mفتوحة بشكل افتراضي
+        // جعل الأقسام مفتوحة بشكل افتراضي
         document.addEventListener('DOMContentLoaded', function() {
             // فتح جميع الأقسام عند تحميل الصفحة
             document.querySelectorAll('.card-body').forEach(section => {
                 section.classList.remove('collapsed');
             });
-            
-            // إضافة تفاعلية للنموذج
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    showToast('شكراً لك على رسالتك! سنقوم بالرد عليك في أقرب وقت ممكن.');
-                    contactForm.reset();
-                });
-            }
             
             // إضافة تأثير التحميل عند النقر على أزرار التحميل
             document.querySelectorAll('.download-btn').forEach(button => {
