@@ -178,6 +178,41 @@
             font-weight: 400;
         }
         
+        /* إضافة أنماط معلومات المعلم */
+        .teacher-info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .teacher-name {
+            font-family: 'El Messiri', sans-serif;
+            font-size: 1.3rem; /* تم تصغير الحجم */
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .teacher-name i {
+            color: #ffd700;
+            font-size: 1.2rem; /* تم تصغير حجم الأيقونة */
+        }
+        
+        .teacher-position {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem; /* تم تصغير الحجم */
+            color: #e0e0e0;
+            text-align: center;
+        }
+        
         /* إضافة الأنماط الخاصة بالأيقونة الدائرية */
         .exam-schedule-icon {
             display: flex;
@@ -919,6 +954,14 @@
                 font-size: 1.4rem;
             }
             
+            .teacher-name {
+                font-size: 1.1rem;
+            }
+            
+            .teacher-position {
+                font-size: 0.9rem;
+            }
+            
             .icon-circle {
                 width: 100px;
                 height: 100px;
@@ -999,6 +1042,15 @@
                 </div>
                 <h1>منصة مسار</h1>
                 <p class="subtitle">بوابتك إلى عالم الرياضيات</p>
+                
+                <!-- إضافة معلومات المعلم -->
+                <div class="teacher-info">
+                    <div class="teacher-name">
+                        <i class="fas fa-user-graduate"></i>
+                        إعداد : أ.محمد المزروعي
+                    </div>
+                    <div class="teacher-position">معلم أول مادة الرياضيات</div>
+                </div>
             </div>
         </header>
         
