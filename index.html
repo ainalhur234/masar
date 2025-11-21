@@ -52,10 +52,12 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             background: 
-                /* بديل للصورة - تدرج لوني جذاب */
-                linear-gradient(135deg, rgba(67, 97, 238, 0.85), rgba(58, 12, 163, 0.85)),
-                /* نمط رياضي كخلفية بديلة */
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);
+                /* تم إضافة الصورة كخلفية */
+                url('https://drive.google.com/uc?export=view&id=1Mm3Ka7QBKGtECnWdI1-xCt_eicYeSQGI'),
+                linear-gradient(135deg, rgba(67, 97, 238, 0.85), rgba(58, 12, 163, 0.85));
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
             color: white;
             min-height: 400px;
             display: flex;
